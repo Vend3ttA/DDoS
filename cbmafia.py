@@ -113,7 +113,7 @@ class MainLoop():
     
     
     try:
-        target = input('Enter URL: ')
+        url = input('Enter URL: ')
     except:
         url = input('Target Example:http://site.com: ')
     
